@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -23,19 +22,24 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "El nombre no debe ser vacío")
+    @NotEmpty(message = "Name must not be empty")
     private String name;
+
     private String description;
-    @Positive(message = "El stock debe ser mayor que cero")
+
+    @Positive(message = "Stock must be greater than zero")
     private Double stock;
+
     private Double price;
     private String status;
+
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date   createAt;
-    @NotNull(message = "La categoria no puede ser vacia")
+    private Date createAt;
+
+    @NotNull(message = "Category must not be null")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
 }
